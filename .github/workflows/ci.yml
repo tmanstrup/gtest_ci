@@ -21,16 +21,13 @@ jobs:
 
     - name: Configure CMake
       run: |
-        mkdir build
-        cd build
-        cmake .. -DBUILD_TEST=ON
+        cmake -B build -S . -DBUILD_TEST=ON
 
     - name: Build
       run: |
-        cd build
-        make
+        cmake --build build
 
     - name: Run tests
       run: |
         cd build
-        ./sum_test
+        ctest --output-on-failure
